@@ -1,1 +1,0 @@
-const demo = 'demo git';
