@@ -1,5 +1,6 @@
 import HomePage from '~/pages/home';
-import AuthPage from '~/pages/auth';
+import LoginPage from '~/pages/auth/login';
+import Register from '~/pages/auth/register';
 
 const publicRoutes = [
     {
@@ -8,8 +9,13 @@ const publicRoutes = [
         layout: null,
     },
     {
-        path: '/auth',
-        component: AuthPage,
+        path: '/login',
+        component: LoginPage,
+        layout: null,
+    },
+    {
+        path: '/register',
+        component: Register,
         layout: null,
     },
 ];
