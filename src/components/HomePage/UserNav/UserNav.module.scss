@@ -1,0 +1,65 @@
+.wrap {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    &:hover .box {
+        display: block;
+        opacity: 1;
+    }
+}
+
+.user {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.item {
+    width: 50px;
+    height: 50px;
+    margin: 10px 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+}
+
+.box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background-color: #ccc;
+    opacity: 0;
+    display: none;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
