@@ -1,39 +1,47 @@
-import React, { Component } from 'react';
-import Slider from 'react-slick';
+import classNames from 'classnames/bind';
+import styles from './Slider.module.scss';
 
-export default class SimpleSlider extends Component {
-    render() {
-        const settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
+import slide1 from '~/assets/images/slide-2.jpg';
+import slide2 from '~/assets/images/slide-4.jpg';
+import slide3 from '~/assets/images/slide-6.jpg';
+import slide4 from '~/assets/images/slide-5.jpg';
+import { useEffect, useState } from 'react';
+
+const cx = classNames.bind(styles);
+
+function Slider() {
+    const [slide, setSlide] = useState([slide1, slide2, slide3, slide4]);
+    const [active, setActive] = useState(slide[0]);
+    const [timer, setTimer] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimer((prev) => prev + 1);
+        }, 3000);
+
+        return () => {
+            clearInterval(interval);
         };
-        return (
-            <div>
-                <h2> Single Item</h2>
-                <Slider {...settings}>
-                    <div>
-                        <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
-                </Slider>
+    }, []);
+
+    useEffect(() => {
+        if (timer === 4) {
+            setTimer(0);
+        }
+
+        setActive(slide[timer]);
+    }, [slide, timer]);
+
+    return (
+        <div className={cx('wrap')}>
+            <img className={cx('img')} src={active} alt="" />
+            <div className={cx('list')}>
+                {slide.map((item, index) => (
+                    <div className={cx('item', timer === index && 'active')}></div>
+                ))}
             </div>
-        );
-    }
+        </div>
+    );
 }
+
+export default Slider;

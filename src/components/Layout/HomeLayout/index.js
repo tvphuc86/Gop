@@ -1,7 +1,7 @@
-import Header from '~/components/HomePage/Header';
+import Header from '~/components/Layout/Header';
 import styles from './HomeLayout.module.scss';
 import classNames from 'classnames/bind';
-import Footer from '~/components/HomePage/Footer';
+import Footer from '~/components/Layout/Footer';
 
 const cx = classNames.bind(styles);
 
@@ -9,7 +9,7 @@ function HomeLayout({ children }) {
     return (
         <div className={cx('wrap')}>
             <Header />
-            <div className="md:container md:mx-auto">{children}</div>
+            <div className={cx('container') + ' md:container md:mx-auto'}>{children}</div>
             <Footer />
         </div>
     );

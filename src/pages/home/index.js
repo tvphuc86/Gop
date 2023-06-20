@@ -5,6 +5,7 @@ import tablet from '~/assets/icon/tablet.png';
 import watch from '~/assets/icon/smart-watch.png';
 import laptop from '~/assets/icon/laptop.png';
 import { Link } from 'react-router-dom';
+import Slider from '~/components/HomePage/Slider';
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +14,9 @@ function Home() {
         <div className={cx('wrap')}>
             <div className={cx('container')}>
                 <div className="container">
-                    <div className={cx('slide')}>slider 1</div>
+                    <div className={cx('slide')}>
+                        <Slider />
+                    </div>
                     <div className={cx('list-cate')}>
                         <Link to="/news">
                             <div className={cx('cate-item', 'item-1')}>

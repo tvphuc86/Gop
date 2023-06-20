@@ -5,6 +5,8 @@ import HomePage from '~/pages/home';
 import LoginPage from '~/pages/auth/login';
 import Register from '~/pages/auth/register';
 import NewsPage from '~/pages/news';
+import UserPage from '~/pages/user';
+import DetailPage from '~/pages/detail';
 
 const publicRoutes = [
     {
@@ -26,6 +28,16 @@ const publicRoutes = [
         path: '/register',
         component: Register,
         layout: null,
+    },
+    {
+        path: '/details/:id',
+        component: DetailPage,
+        layout: HomeLayout,
+    },
+    {
+        path: '/user/:id',
+        component: UserPage,
+        layout: HomeLayout,
     },
     {
         path: '/news',

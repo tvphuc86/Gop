@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 
 import icon from '~/assets/images/icon_shopping.png';
-import Search from '../Search';
+import Search from '../../HomePage/Search';
 import UserNav from '~/components/HomePage/UserNav';
 import { Link } from 'react-router-dom';
 
