@@ -5,6 +5,7 @@ import icon from '~/assets/images/icon_shopping.png';
 import Search from '../../HomePage/Search';
 import UserNav from '~/components/HomePage/UserNav';
 import { Link } from 'react-router-dom';
+import MenuTool from '~/components/Global/MenuTool';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,7 @@ function Header() {
             <div>
                 <UserNav />
             </div>
+            <MenuTool />
         </div>
     );
 }
