@@ -7,9 +7,9 @@ import img from '~/assets/images/iphone-14.jpg';
 import chatIcon from '~/assets/icon/messenger.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faHeart as faHeartSolid, faEye, faE } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faHeart as faHeartSolid, faEye } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import { Button, Modal, Tooltip, Image } from 'antd';
+import { Modal, Tooltip, Image } from 'antd';
 
 const cx = classNames.bind(styles);
 

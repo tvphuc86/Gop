@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
+import { Link } from 'react-router-dom';
+
 import mobile from '~/assets/icon/mobile.png';
 import tablet from '~/assets/icon/tablet.png';
 import watch from '~/assets/icon/smart-watch.png';
 import laptop from '~/assets/icon/laptop.png';
-import { Link } from 'react-router-dom';
 import Slider from '~/components/HomePage/Slider';
 import CardNews from '~/components/Global/CardNews';
 
