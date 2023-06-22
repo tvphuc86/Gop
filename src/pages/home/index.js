@@ -6,6 +6,7 @@ import watch from '~/assets/icon/smart-watch.png';
 import laptop from '~/assets/icon/laptop.png';
 import { Link } from 'react-router-dom';
 import Slider from '~/components/HomePage/Slider';
+import CardNews from '~/components/Global/CardNews';
 
 const cx = classNames.bind(styles);
 
@@ -47,12 +48,24 @@ function Home() {
                         <h1 className={cx('heading-1') + ' text-center'}>NEW POSTS</h1>
                         <div className={cx('list')}>
                             <div className="grid grid-cols-3 gap-x-8 gap-y-12">
-                                <div className={cx('item')}></div>
-                                <div className={cx('item')}></div>
-                                <div className={cx('item')}></div>
-                                <div className={cx('item')}></div>
-                                <div className={cx('item')}></div>
-                                <div className={cx('item')}></div>
+                                <div className={cx('item')}>
+                                    <CardNews />
+                                </div>
+                                <div className={cx('item')}>
+                                    <CardNews />
+                                </div>
+                                <div className={cx('item')}>
+                                    <CardNews />
+                                </div>
+                                <div className={cx('item')}>
+                                    <CardNews />
+                                </div>
+                                <div className={cx('item')}>
+                                    <CardNews />
+                                </div>
+                                <div className={cx('item')}>
+                                    <CardNews />
+                                </div>
                             </div>
                         </div>
                     </div>

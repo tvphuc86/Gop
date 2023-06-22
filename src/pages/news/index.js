@@ -3,6 +3,8 @@ import styles from './news.module.scss';
 
 import { useState } from 'react';
 import { Select, Slider, Input, Pagination } from 'antd';
+import { NumberVND } from '~/functions';
+import CardNews from '~/components/Global/CardNews';
 
 import searchIcon from '~/assets/icon/magnifying-glass.png';
 
@@ -10,10 +12,6 @@ const cx = classNames.bind(styles);
 
 function News() {
     const [priceValue, setPriceValue] = useState([0, 10000000]);
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    }
 
     const onChange = (pageNumber) => {
         console.log('Page: ', pageNumber);
@@ -26,10 +24,18 @@ function News() {
                     <h1 className={cx('heading-1') + ' text-center'}>NEW POSTS</h1>
                     <div className={cx('list')}>
                         <div className="grid grid-cols-4 gap-x-8 gap-y-12">
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +73,7 @@ function News() {
                         <div className={cx('price')}>
                             <p>Price range</p>
                             <div className="flex items-center">
-                                <span style={{ width: '70px' }}>{numberWithCommas(priceValue[0])}đ</span>
+                                <span style={{ width: '70px' }}>{NumberVND(priceValue[0])}đ</span>
                                 <div className={cx('slider')}>
                                     <Slider
                                         value={priceValue}
@@ -79,7 +85,7 @@ function News() {
                                         onChange={(e) => setPriceValue(e)}
                                     />
                                 </div>
-                                <span style={{ width: '70px' }}>{numberWithCommas(priceValue[1])}đ</span>
+                                <span style={{ width: '70px' }}>{NumberVND(priceValue[1])}đ</span>
                             </div>
                         </div>
                         <div className={cx('search')}>
@@ -89,14 +95,30 @@ function News() {
                     </div>
                     <div className={cx('list')}>
                         <div className="grid grid-cols-4 gap-x-8 gap-y-12">
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
-                            <div className={cx('item')}></div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
+                            <div className={cx('item')}>
+                                <CardNews />
+                            </div>
                         </div>
                     </div>
                     <div className="flex justify-center">
