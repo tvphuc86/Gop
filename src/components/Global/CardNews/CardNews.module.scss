@@ -6,6 +6,8 @@
     overflow: hidden;
     background-color: #fff;
     transition: all ease 0.4s;
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.1);
 
     &:hover {
         cursor: pointer;
@@ -68,6 +70,7 @@
 
     .list-icon {
         position: absolute;
+        width: 100%;
         top: 30%;
         right: 0;
         left: 0;
@@ -79,8 +82,9 @@
 
         .icon {
             font-size: 30px;
+            padding: 0 10px;
             color: #fff;
-
+            z-index: 100;
             &:hover {
                 color: beige;
             }

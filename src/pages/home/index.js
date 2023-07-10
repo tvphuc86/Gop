@@ -8,10 +8,32 @@ import watch from '~/assets/icon/smart-watch.png';
 import laptop from '~/assets/icon/laptop.png';
 import Slider from '~/components/HomePage/Slider';
 import CardNews from '~/components/Global/CardNews';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
 function Home() {
+    const [cookies, setCookies] = useCookies(['user']);
+    const [listProduct, setListProduct] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('https://localhost:7105/api/Product/getAll', {
+                params: {
+                    page: 0,
+                    size: 8,
+                },
+            })
+            .then((res) => {
+                if (res.status === 200) {
+                    setListProduct(res.data.productList);
+                }
+            })
+            .catch((err) => console.log(err));
+    }, []);
     return (
         <div className={cx('wrap')}>
             <div className={cx('container')}>
@@ -49,24 +71,11 @@ function Home() {
                         <h1 className={cx('heading-1') + ' text-center'}>NEW POSTS</h1>
                         <div className={cx('list')}>
                             <div className="grid grid-cols-3 gap-x-8 gap-y-12">
-                                <div className={cx('item')}>
-                                    <CardNews />
-                                </div>
-                                <div className={cx('item')}>
-                                    <CardNews />
-                                </div>
-                                <div className={cx('item')}>
-                                    <CardNews />
-                                </div>
-                                <div className={cx('item')}>
-                                    <CardNews />
-                                </div>
-                                <div className={cx('item')}>
-                                    <CardNews />
-                                </div>
-                                <div className={cx('item')}>
-                                    <CardNews />
-                                </div>
+                                {listProduct.map((product, index) => (
+                                    <div className={cx('item')}>
+                                        <CardNews key={index} product={product} />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,12 @@ import LoginPage from '~/pages/auth/login';
 import Register from '~/pages/auth/register';
 import NewsPage from '~/pages/news';
 import UserPage from '~/pages/user';
-import DetailPage from '~/pages/detail';
+import AddressPage from '~/pages/address';
+import Detailproduct from '~/pages/detailproduct/Detailproduct';
+import PageNotFound from '~/pages/notfound';
+import ChangePassword from '~/pages/changePasword';
+import ForgotPassword from '~/pages/auth/Forget';
+import ResetPassword from '~/pages/auth/reset';
 
 const publicRoutes = [
     {
@@ -25,13 +30,18 @@ const publicRoutes = [
         layout: null,
     },
     {
+        path: '/forgot',
+        component: ForgotPassword,
+        layout: null,
+    },
+    {
         path: '/register',
         component: Register,
         layout: null,
     },
     {
-        path: '/details/:id',
-        component: DetailPage,
+        path: '/detail/:id',
+        component: Detailproduct,
         layout: HomeLayout,
     },
     {
@@ -43,6 +53,22 @@ const publicRoutes = [
         path: '/news',
         component: NewsPage,
         layout: HomeLayout,
+    },
+    {
+        path: '/account/address',
+        component: AddressPage,
+        layout: HomeLayout,
+    },
+    {
+        path: '/ResetPassword',
+        component: ResetPassword,
+        layout: null,
+    },
+
+    {
+        path: '*',
+        component: PageNotFound,
+        layout: null,
     },
 ];
 

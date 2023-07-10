@@ -1,18 +1,22 @@
 import classNames from 'classnames/bind';
 import styles from './Register.module.scss';
 
-import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Link, json } from 'react-router-dom';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { Checkbox } from 'antd';
+import { Checkbox, message } from 'antd';
+import axios, { formToJSON } from 'axios';
+import Loading from '~/components/Global/Loading';
 
 const cx = classNames.bind(styles);
 
 function Register() {
+    const [messageApi, contextHolder] = message.useMessage();
     // hook state
+    const [isLoader, setIsLoader] = useState(false);
     const [isPassword, setIsPw] = useState(false);
     const [isConfirmPw, setIsConfirmPw] = useState(false);
-    const [firstName, setFirstName] = useState('');
+    const [userName, setUsername] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,33 +24,23 @@ function Register() {
     const [checkbox, setCheckBox] = useState(true);
 
     // hook ref
-    const firstNameRef = useRef(null);
-    const lastNameref = useRef(null);
+    const userNameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPWRef = useRef(null);
     const checkBoxRef = useRef(null);
     const logEmail = useRef(null);
-    const logFirstName = useRef(null);
-    const logLastName = useRef(null);
+    const loguserName = useRef(null);
     const logPassword = useRef(null);
     const logConfirmPw = useRef(null);
 
     const validator = () => {
-        if (!firstName) {
-            firstNameRef.current.focus();
-            logFirstName.current.style.display = 'inline';
+        if (!userName) {
+            userNameRef.current.focus();
+            loguserName.current.style.display = 'inline';
             return false;
         } else {
-            logFirstName.current.style.display = 'none';
-        }
-
-        if (!lastName) {
-            lastNameref.current.focus();
-            logLastName.current.style.display = 'inline';
-            return false;
-        } else {
-            logLastName.current.style.display = 'none';
+            loguserName.current.style.display = 'none';
         }
 
         if (!validateEmail(email)) {
@@ -60,6 +54,15 @@ function Register() {
         if (!password) {
             passwordRef.current.focus();
             logPassword.current.style.display = 'inline';
+            return false;
+        } else {
+            logPassword.current.style.display = 'none';
+        }
+
+        if (password.length < 6) {
+            passwordRef.current.focus();
+            logPassword.current.style.display = 'inline';
+            logPassword.current.innerHTML = 'Your password is shorter than 6 characters';
             return false;
         } else {
             logPassword.current.style.display = 'none';
@@ -84,13 +87,43 @@ function Register() {
 
     const submitRegister = () => {
         if (validator()) {
-            setFirstName('');
-            setLastName('');
+            setUsername('');
             setEmail('');
             setPassword('');
             setConfirmPW('');
-            alert('Success');
+            register();
         }
+    };
+
+    const register = () => {
+        setIsLoader(true);
+        const formData = {
+            username: userName,
+            email: email,
+            password: password,
+            confirmPassword: confirmPW,
+        };
+        axios
+            .post('https://localhost:44352/api/Auth/register', JSON.stringify(formData), {
+                headers: {
+                    'content-type': 'application/json',
+                },
+            })
+            .then((res) => {
+                if (res.status === 200) {
+                    message.success('Successful Registration');
+                    setIsLoader(false);
+                }
+            })
+            .catch((err) => {
+                if (err.response.status === 400) {
+                    err.response.data.errors.forEach((err) => {
+                        message.error(err);
+                    });
+                    console.log(err);
+                    setIsLoader(false);
+                }
+            });
     };
     return (
         <div className={cx('wrap')}>
@@ -98,31 +131,18 @@ function Register() {
                 <h1 className="text-center text-4xl">Register</h1>
                 <div className="flex justify-around">
                     <div className={cx('group')}>
-                        <div className={cx('item', 'item-name')}>
-                            <div className={cx('name')}>
-                                <input
-                                    ref={firstNameRef}
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                    type="text"
-                                    placeholder="First name"
-                                />
-                                <span ref={logFirstName} className={cx('item-log')} style={{ display: 'none' }}>
-                                    Enter first name
-                                </span>
-                            </div>
-                            <div className={cx('name')}>
-                                <input
-                                    ref={lastNameref}
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                    type="text"
-                                    placeholder="Last name"
-                                />
-                                <span ref={logLastName} className={cx('item-log')} style={{ display: 'none' }}>
-                                    Enter last name
-                                </span>
-                            </div>
+                        <div className={cx('item')}>
+                            <input
+                                ref={userNameRef}
+                                value={userName}
+                                onChange={(e) => setUsername(e.target.value)}
+                                type="text"
+                                placeholder="Enter your username"
+                                onKeyDown={(e) => e.key === 'Enter' && submitRegister()}
+                            />
+                            <span ref={loguserName} className={cx('item-log')} style={{ display: 'none' }}>
+                                Enter username
+                            </span>
                         </div>
                         <div className={cx('item')}>
                             <input
@@ -130,6 +150,7 @@ function Register() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 type="email"
+                                onKeyDown={(e) => e.key === 'Enter' && submitRegister()}
                                 placeholder="Enter your email"
                             />
                             <span ref={logEmail} className={cx('item-log')} style={{ display: 'none' }}>
@@ -143,6 +164,7 @@ function Register() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 type={isPassword ? 'text' : 'password'}
+                                onKeyDown={(e) => e.key === 'Enter' && submitRegister()}
                                 placeholder="Password"
                             />
                             <div className={cx('icon')}>
@@ -163,6 +185,7 @@ function Register() {
                                 value={confirmPW}
                                 onChange={(e) => setConfirmPW(e.target.value)}
                                 type={isConfirmPw ? 'text' : 'password'}
+                                onKeyDown={(e) => e.key === 'Enter' && submitRegister()}
                                 placeholder="Confirm password"
                             />
                             <div className={cx('icon')}>
@@ -199,6 +222,7 @@ function Register() {
                     </div>
                 </div>
             </div>
+            {isLoader && <Loading />}
         </div>
     );
 }
