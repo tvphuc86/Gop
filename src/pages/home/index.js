@@ -21,7 +21,7 @@ function Home() {
 
     useEffect(() => {
         axios
-            .get('https://localhost:7105/api/Product/getAll', {
+            .get('https://localhost:44352/api/Product/getAll', {
                 params: {
                     page: 0,
                     size: 8,
